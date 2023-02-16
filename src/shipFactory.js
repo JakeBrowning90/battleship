@@ -7,11 +7,13 @@ class Ship {
         this.sunk = false;
     }
 
+    // Add to the ship's hit counter
     hit() {
         this.hitCounter++;
         return this.hitCounter;
     }
 
+    // Mark ship as sunk when hit counter == length
     isSunk() {
         if (this.hitCounter == this.length) {
             this.sunk = true;
