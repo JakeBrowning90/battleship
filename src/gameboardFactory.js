@@ -14,8 +14,8 @@ class Gameboard {
             let row = [];
             for (let j = 0; j < 10; j++) {
                 let cell = {};
-                cell.xCoord = i;
-                cell.yCoord = j;
+                cell.row = i;
+                cell.col = j;
                 // Give each cell a "contains" property to indicate which ship is there?
                 cell.contains = null;
                 row[j] = cell;
@@ -32,11 +32,20 @@ class Gameboard {
         // For each ship:
         for (let i = 0; i < fleet.length; i++) {
             // Get coordinates and horizontal/vertical orientation
-            let orientation = "h"
-            let placement = [0, 0];
-        
+            let orientation = prompt("Enter ship orientation (h or v)");
+            let row = parseInt(prompt("Enter row"));
+            let col = parseInt(prompt("Enter column"));
+            let placement = [row, col]
+
             // Check that placement is on board
             if (this.isShipOnBoard(placement, fleet[i].length, orientation) == true) {
+                for (let j = 0; j < fleet[i].length; j++) {
+                    if (orientation == 'h') {
+                        this.allSpaces[placement[0]][placement[1] + j].contains = fleet[i].name;
+                    } else if (orientation == 'v') {
+                        this.allSpaces[placement[0] + j][placement[1]].contains = fleet[i].name;
+                    }
+                } 
 
             }
             // Check that placement does not conflict with other ships
@@ -56,7 +65,9 @@ class Gameboard {
         } else if (orientation == 'v') {
             if (startingCell[1] + shipLength <= 10) {
                 return true;  
-            }
+            } else {
+                return false;  
+            }    
         } 
         
     }
