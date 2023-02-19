@@ -32,7 +32,15 @@ class Gameboard {
         // For each ship:
         for (let i = 0; i < fleet.length; i++) {
             // Get coordinates and horizontal/vertical orientation
-            let orientation = prompt("Enter ship orientation (h or v)");
+            let orientation;
+            let check;
+            do { 
+                orientation = prompt("Enter ship orientation (h or v)");
+                if (orientation == 'h' || orientation == 'v') {
+                     check = 1;
+                }
+            } while(check != 1)
+            //let orientation = prompt("Enter ship orientation (h or v)");
             let row = parseInt(prompt("Enter row"));
             let col = parseInt(prompt("Enter column"));
             let placement = [row, col]
@@ -48,6 +56,9 @@ class Gameboard {
                 } 
 
             }
+
+            // Get prospective placement 
+            
             // Check that placement does not conflict with other ships
 
             // Push legal coordinates to occupiedSpaces

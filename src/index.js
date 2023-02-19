@@ -15,4 +15,4 @@ console.log("Anchors aweigh!");
 
 let player1Board = new Gameboard();
 console.log(player1Board);
-player1Board.placeShips();
+//player1Board.placeShips();
