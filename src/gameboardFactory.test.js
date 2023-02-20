@@ -27,3 +27,19 @@ test('vertical ship  of length 5 in square 0,5 returns true', () => {
 test('vertical ship  of length 5 in square 0,6 returns false', () => {
     expect(new Gameboard().isShipOnBoard([0, 6], 5, "v")).toBe(false);
 });
+
+test('returns false if no occupied spaces', () => {
+    expect(new Gameboard().doesPlacementClash(['0, 0'], [])).toBe(false);
+});
+
+test('returns false if no shared values', () => {
+    expect(new Gameboard().doesPlacementClash(['0, 0'], ['1,1'])).toBe(false);
+});
+
+test('returns true if shared values', () => {
+    expect(new Gameboard().doesPlacementClash(['0, 0'], ['0, 0'])).toBe(true);
+});
+
+test('returns true if shared values among multiple entries', () => {
+    expect(new Gameboard().doesPlacementClash(['0, 0', '1, 1'], ['2, 2', '1, 1'])).toBe(true);
+});
