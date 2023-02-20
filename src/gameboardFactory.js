@@ -47,13 +47,17 @@ class Gameboard {
 
             // Check that placement is on board
             if (this.isShipOnBoard(placement, fleet[i].length, orientation) == true) {
+                let proposedSpaces = [];
                 for (let j = 0; j < fleet[i].length; j++) {
                     if (orientation == 'h') {
                         this.allSpaces[placement[0]][placement[1] + j].contains = fleet[i].name;
+                        proposedSpaces.push(this.allSpaces[placement[0]][placement[1] + j])
                     } else if (orientation == 'v') {
                         this.allSpaces[placement[0] + j][placement[1]].contains = fleet[i].name;
+                        proposedSpaces.push(this.allSpaces[placement[0] + j][placement[1]]);
                     }
                 } 
+                console.log(proposedSpaces);
 
             }
 
