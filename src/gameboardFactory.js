@@ -35,6 +35,7 @@ class Gameboard {
         for (let i = 0; i < fleet.length; i++) {
             // Get coordinates and horizontal/vertical orientation
             let orientation;
+            // Get prospective placement 
             let placement;
             let proposedSpaces;
             do {
@@ -46,29 +47,20 @@ class Gameboard {
                 proposedSpaces = this.getProposedSpaces(orientation, placement, fleet[i].length);
                 // Check that placement doesn't conflict with prior ships
             } while(this.doesPlacementClash(proposedSpaces))
-
-                for (let j = 0; j < fleet[i].length; j++) {
-                    if (orientation == 'h') {
-                        this.allSpaces[placement[0]][placement[1] + j].contains = fleet[i].name;
-                        // proposedSpaces.push(this.allSpaces[placement[0]][placement[1] + j].coord)
-                    } else if (orientation == 'v') {
-                        this.allSpaces[placement[0] + j][placement[1]].contains = fleet[i].name;
-                        // proposedSpaces.push(this.allSpaces[placement[0] + j][placement[1]].coord);
-                    }
-                } 
-
-                // Add newly filled spaces to list of all filled spaces
-                this.occupiedSpaces.push(...proposedSpaces);
-            }
-
-            // Get prospective placement 
-            
-            // Check that placement does not conflict with other ships
-            // for value in proposedSpaces, check if alread in occupiedSpaces
-
-            // Push legal coordinates to occupiedSpaces
+            // Add the ship to the gameboard
+            for (let j = 0; j < fleet[i].length; j++) {
+                if (orientation == 'h') {
+                    this.allSpaces[placement[0]][placement[1] + j].contains = fleet[i].name;
+                } else if (orientation == 'v') {
+                    this.allSpaces[placement[0] + j][placement[1]].contains = fleet[i].name;
+                }
+            } 
+            // Add newly filled spaces to list of all filled spaces
+            this.occupiedSpaces.push(...proposedSpaces);
+        }
     }
 
+    // Determine if ship will be placed horizontally or vertically
     getOrientation(shipName) {
         let direction;
         let check;
@@ -81,6 +73,7 @@ class Gameboard {
         return direction;
     }
 
+    // Get starting square for a new ship placement
     getPlacement() {
         let row;
         let col; 
@@ -93,6 +86,7 @@ class Gameboard {
         return [row, col];
     };
 
+    // Get the spaces the ship would occupy
     getProposedSpaces(orientation, placement, shipLength) {
         let proposedSpaces = [];
         for (let j = 0; j < shipLength; j++) {
@@ -102,10 +96,10 @@ class Gameboard {
                 proposedSpaces.push(this.allSpaces[placement[0] + j][placement[1]].coord);
             }
         } 
-        console.log(proposedSpaces);
         return proposedSpaces;
     }
 
+    // Check that the ship's length and direction don't go off the board
     isShipOnBoard(startingCell, shipLength, orientation) {
         if (orientation == 'h') {
             if (startingCell[1] + shipLength <= 10) {
@@ -125,20 +119,47 @@ class Gameboard {
         
     }
 
+    // Check if the new ship's squares have already been used by other ships
     doesPlacementClash(proposedSpaces) {
-        console.log(proposedSpaces);
         for (let i = 0; i < proposedSpaces.length; i++) {
             if (this.occupiedSpaces.includes(proposedSpaces[i])) {
                 console.log("Ship in the way!")
                 return true;
             }
         }
-        console.log("No conflict")
+        // console.log("No conflict")
         return false;
     }
 
     receiveAttack() {
+        // Get attack's coordinates
+        let attackCoord =  this.getAttackCoord();
+        console.log(attackCoord);
+        let targetedSquare = this.allSpaces[attackCoord[0]][attackCoord[1]];
+        // Check if attack hits a ship
+        if (targetedSquare.contains == null) {
+            console.log("Miss!")
+            this.missedShots.push(attackCoord);
+        } else {
+            console.log("Hit!")
+            let struckShip = targetedSquare.contains;
+            console.log(struckShip);
+        }
+            // If hit, run hit() function on affected ship
+            // If miss, push coordinates to missedShots array
 
+    }
+
+    getAttackCoord() {
+        let row;
+        let col; 
+        do {
+            row = parseInt(prompt("Enter attack row"));
+        } while (row < 0 || row > 9)
+        do {
+            col = parseInt(prompt("Enter attack column"));
+        } while (col < 0 || col > 9)
+        return [row, col];
     }
 
     checkFleet() {
