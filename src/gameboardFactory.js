@@ -134,12 +134,13 @@ class Gameboard {
     receiveAttack() {
         // Get attack's coordinates
         let attackCoord =  this.getAttackCoord();
-        console.log(attackCoord);
+        console.log("Firing: " + attackCoord);
         let targetedSquare = this.allSpaces[attackCoord[0]][attackCoord[1]];
         // Check if attack hits a ship
         if (targetedSquare.contains == null) {
-            console.log("Miss!")
             this.missedShots.push(attackCoord);
+            console.log("Miss!")
+            console.log(this.missedShots)
         } else {
             console.log("Hit!")
             let struckShip = targetedSquare.contains;
