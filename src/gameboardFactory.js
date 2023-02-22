@@ -16,6 +16,7 @@ class Gameboard {
                 let cell = {};
                 cell.coord = `${i}, ${j}`;
                 cell.contains = null;
+                cell.tried = false;
                 // cell.row = i;
                 // cell.col = j;
                 // Give each cell a "contains" property to indicate which ship is there?
@@ -50,9 +51,9 @@ class Gameboard {
             // Add the ship to the gameboard
             for (let j = 0; j < fleet[i].length; j++) {
                 if (orientation == 'h') {
-                    this.allSpaces[placement[0]][placement[1] + j].contains = fleet[i].name;
+                    this.allSpaces[placement[0]][placement[1] + j].contains = fleet[i];
                 } else if (orientation == 'v') {
-                    this.allSpaces[placement[0] + j][placement[1]].contains = fleet[i].name;
+                    this.allSpaces[placement[0] + j][placement[1]].contains = fleet[i];
                 }
             } 
             // Add newly filled spaces to list of all filled spaces
@@ -133,21 +134,32 @@ class Gameboard {
 
     receiveAttack() {
         // Get attack's coordinates
-        let attackCoord =  this.getAttackCoord();
-        console.log("Firing: " + attackCoord);
-        let targetedSquare = this.allSpaces[attackCoord[0]][attackCoord[1]];
+        let attackCoord;
+        let targetedSquare;
+        do { 
+            attackCoord =  this.getAttackCoord();
+            console.log("Firing: " + attackCoord);
+            targetedSquare = this.allSpaces[attackCoord[0]][attackCoord[1]];
+            if (targetedSquare.tried == true) {
+                console.log("Square already played! Try again!")
+            }
+        } while (targetedSquare.tried == true)
+        // Update targeted square so it can't be hit again
+        targetedSquare.tried = true
         // Check if attack hits a ship
         if (targetedSquare.contains == null) {
+            // If miss, push coordinates to missedShots array
             this.missedShots.push(attackCoord);
             console.log("Miss!")
             console.log(this.missedShots)
         } else {
-            console.log("Hit!")
-            let struckShip = targetedSquare.contains;
-            console.log(struckShip);
-        }
             // If hit, run hit() function on affected ship
-            // If miss, push coordinates to missedShots array
+            console.log("Hit!")
+            targetedSquare.contains.hit();
+            targetedSquare.contains.isSunk();
+            console.log(targetedSquare.contains);
+        }
+            
 
     }
 
