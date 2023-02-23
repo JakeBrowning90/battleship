@@ -6,7 +6,7 @@ class Gameboard {
         // this.occupiedSpaces = placeShips();
         this.occupiedSpaces = [];
         this.missedShots = [];
-        this.fleet = [new Ship("carrier", 1), new Ship("battleship", 1), new Ship("destroyer", 1), new Ship("submarine", 1), new Ship("patrol boat", 1)];
+        this.fleet = [new Ship("carrier", 5), new Ship("battleship", 4), new Ship("destroyer", 3), new Ship("submarine", 3), new Ship("patrol boat", 2)];
     }
 
     generateSpaces() {
@@ -154,7 +154,7 @@ class Gameboard {
             // If miss, push coordinates to missedShots array
             this.missedShots.push(attackCoord);
             console.log("Miss!")
-            console.log(this.missedShots)
+            //console.log(this.missedShots)
         } else {
             // If hit, run hit() function on affected ship
             console.log("Hit!")
@@ -164,11 +164,7 @@ class Gameboard {
             if (targetedSquare.contains.sunk == true) {
                 console.log(targetedSquare.contains.name + " sunk!");
             }
-
-            // this.isFleetSunk();
         }
-            
-
     }
 
     getAttackCoord() {
