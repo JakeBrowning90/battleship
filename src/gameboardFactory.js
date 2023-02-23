@@ -6,7 +6,7 @@ class Gameboard {
         // this.occupiedSpaces = placeShips();
         this.occupiedSpaces = [];
         this.missedShots = [];
-        this.fleet = [new Ship("carrier", 5), new Ship("battleship", 4), new Ship("destroyer", 3), new Ship("submarine", 3), new Ship("patrol boat", 2)];
+        this.fleet = [new Ship("Carrier", 1), new Ship("Battleship", 1), new Ship("Destroyer", 1), new Ship("Submarine", 1), new Ship("Patrol boat", 1)];
     }
 
     generateSpaces() {
@@ -157,7 +157,7 @@ class Gameboard {
             //console.log(this.missedShots)
         } else {
             // If hit, run hit() function on affected ship
-            console.log("Hit!")
+            console.log(targetedSquare.contains.name + " hit!")
             targetedSquare.contains.hit();
             targetedSquare.contains.isSunk();
             // console.log(targetedSquare.contains);
@@ -172,10 +172,10 @@ class Gameboard {
         let col; 
         do {
             row = parseInt(prompt("Enter attack row"));
-        } while (row < 0 || row > 9)
+        } while (row < 0 || row > 9 || isNaN(row))
         do {
             col = parseInt(prompt("Enter attack column"));
-        } while (col < 0 || col > 9)
+        } while (col < 0 || col > 9 || isNaN(row))
         return [row, col];
     }
 
@@ -188,7 +188,7 @@ class Gameboard {
             }
         }
         if (sunkShips == this.fleet.length) {
-            console.log("All ships sunk!");
+            //console.log("All ships sunk!");
             return true;
         } else {
             return false;

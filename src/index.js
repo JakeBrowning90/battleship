@@ -8,13 +8,8 @@ import { Player } from './playerFactory';
 testFunction();
 console.log("Anchors aweigh!");
 
-// let battleship = new Ship("battleship", 4);
-// console.log(battleship);
-// battleship.hit();
-// battleship.isSunk();
-// console.log(battleship);
-
 //let player1Board = new Gameboard();
+alert("Welcome to Battleship!")
 let player1 = new Player(prompt("Enter Player 1 name:"))
 let player2 = new Player(prompt("Enter Player 2 name:"))
 
@@ -26,6 +21,16 @@ player2.gameBoard.placeShips();
 do {
     alert(player1.name + ", enter attack coordinates");
     player2.gameBoard.receiveAttack();
+    if (player2.gameBoard.isFleetSunk() == true) {
+        console.log(player1.name + " wins!");
+        break;
+    }
     alert(player2.name + ", enter attack coordinates");
     player1.gameBoard.receiveAttack();
+    if (player1.gameBoard.isFleetSunk() == true) {
+        console.log(player2.name + " wins!")
+        break;
+    }
 } while (player1.gameBoard.isFleetSunk() == false && player2.gameBoard.isFleetSunk() == false)
+
+console.log("Game over")
