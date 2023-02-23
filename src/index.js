@@ -18,4 +18,4 @@ console.log(player1Board);
 player1Board.placeShips();
 do {
     player1Board.receiveAttack();
-} while (player1Board.occupiedSpaces.length > 0)
+} while (player1Board.isFleetSunk() == false)

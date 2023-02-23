@@ -6,6 +6,7 @@ class Gameboard {
         // this.occupiedSpaces = placeShips();
         this.occupiedSpaces = [];
         this.missedShots = [];
+        this.fleet = [new Ship("carrier", 1), new Ship("battleship", 1), new Ship("destroyer", 1), new Ship("submarine", 1), new Ship("patrol boat", 1)];
     }
 
     generateSpaces() {
@@ -30,10 +31,12 @@ class Gameboard {
 
     placeShips() {
         // Make 5 ships
-        let fleet = [new Ship("carrier", 5), new Ship("battleship", 4), new Ship("destroyer", 3), new Ship("submarine", 3), new Ship("patrol boat", 2)];
+        // Ship length set to 1 for testing
+        // let fleet = [new Ship("carrier", 1), new Ship("battleship", 1), new Ship("destroyer", 1), new Ship("submarine", 1), new Ship("patrol boat", 1)];
+        // let fleet = [new Ship("carrier", 5), new Ship("battleship", 4), new Ship("destroyer", 3), new Ship("submarine", 3), new Ship("patrol boat", 2)];
         
         // For each ship:
-        for (let i = 0; i < fleet.length; i++) {
+        for (let i = 0; i < this.fleet.length; i++) {
             // Get coordinates and horizontal/vertical orientation
             let orientation;
             // Get prospective placement 
@@ -41,19 +44,19 @@ class Gameboard {
             let proposedSpaces;
             do {
                 do {
-                    orientation = this.getOrientation(fleet[i].name);
-                    placement = this.getPlacement(fleet[i].length, orientation);
+                    orientation = this.getOrientation(this.fleet[i].name);
+                    placement = this.getPlacement(this.fleet[i].length, orientation);
                 // Check that placement is on board 
-                } while ((this.isShipOnBoard(placement, fleet[i].length, orientation) == false));
-                proposedSpaces = this.getProposedSpaces(orientation, placement, fleet[i].length);
+                } while ((this.isShipOnBoard(placement, this.fleet[i].length, orientation) == false));
+                proposedSpaces = this.getProposedSpaces(orientation, placement, this.fleet[i].length);
                 // Check that placement doesn't conflict with prior ships
             } while(this.doesPlacementClash(proposedSpaces))
             // Add the ship to the gameboard
-            for (let j = 0; j < fleet[i].length; j++) {
+            for (let j = 0; j < this.fleet[i].length; j++) {
                 if (orientation == 'h') {
-                    this.allSpaces[placement[0]][placement[1] + j].contains = fleet[i];
+                    this.allSpaces[placement[0]][placement[1] + j].contains = this.fleet[i];
                 } else if (orientation == 'v') {
-                    this.allSpaces[placement[0] + j][placement[1]].contains = fleet[i];
+                    this.allSpaces[placement[0] + j][placement[1]].contains = this.fleet[i];
                 }
             } 
             // Add newly filled spaces to list of all filled spaces
@@ -157,7 +160,12 @@ class Gameboard {
             console.log("Hit!")
             targetedSquare.contains.hit();
             targetedSquare.contains.isSunk();
-            console.log(targetedSquare.contains);
+            // console.log(targetedSquare.contains);
+            if (targetedSquare.contains.sunk == true) {
+                console.log(targetedSquare.contains.name + " sunk!");
+            }
+
+            // this.isFleetSunk();
         }
             
 
@@ -175,8 +183,20 @@ class Gameboard {
         return [row, col];
     }
 
-    checkFleet() {
-
+    isFleetSunk() {
+        let sunkShips = 0;
+        for (let i = 0; i < this.fleet.length; i++) {
+            // console.log(this.fleet[i].sunk) 
+            if (this.fleet[i].sunk == true) {
+                sunkShips++
+            }
+        }
+        if (sunkShips == this.fleet.length) {
+            console.log("All ships sunk!");
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
