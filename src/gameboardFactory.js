@@ -1,3 +1,4 @@
+import { Player } from "./playerFactory";
 import { Ship } from "./shipFactory";
 
 class Gameboard {
@@ -6,7 +7,8 @@ class Gameboard {
         // this.occupiedSpaces = placeShips();
         this.occupiedSpaces = [];
         this.missedShots = [];
-        this.fleet = [new Ship("Carrier", 1), new Ship("Battleship", 1), new Ship("Destroyer", 1), new Ship("Submarine", 1), new Ship("Patrol boat", 1)];
+        this.fleet = [new Ship("Carrier", 5), new Ship("Battleship", 4), new Ship("Destroyer", 3), new Ship("Submarine", 3), new Ship("Patrol boat", 2)];
+        this.CPU = false;
     }
 
     generateSpaces() {
@@ -30,11 +32,6 @@ class Gameboard {
     }
 
     placeShips() {
-        // Make 5 ships
-        // Ship length set to 1 for testing
-        // let fleet = [new Ship("carrier", 1), new Ship("battleship", 1), new Ship("destroyer", 1), new Ship("submarine", 1), new Ship("patrol boat", 1)];
-        // let fleet = [new Ship("carrier", 5), new Ship("battleship", 4), new Ship("destroyer", 3), new Ship("submarine", 3), new Ship("patrol boat", 2)];
-        
         // For each ship:
         for (let i = 0; i < this.fleet.length; i++) {
             // Get coordinates and horizontal/vertical orientation
@@ -46,6 +43,7 @@ class Gameboard {
                 do {
                     orientation = this.getOrientation(this.fleet[i].name);
                     placement = this.getPlacement(this.fleet[i].length, orientation);
+                    //console.log(placement);
                 // Check that placement is on board 
                 } while ((this.isShipOnBoard(placement, this.fleet[i].length, orientation) == false));
                 proposedSpaces = this.getProposedSpaces(orientation, placement, this.fleet[i].length);
@@ -68,12 +66,24 @@ class Gameboard {
     getOrientation(shipName) {
         let direction;
         let check;
-        do { 
-            direction = prompt("Enter " + shipName + " orientation (h or v)");
-            if (direction == 'h' || direction == 'v') {
-                check = 1;
+        // Randomly determine direction for CPU 
+        if (this.CPU == true) {
+            let randomDirection = Math.floor(Math.random() * 2);
+            if (randomDirection == 0) {
+                direction = 'h';
+            } else if (randomDirection == 1) {
+                direction = 'v';
             }
-        } while(check != 1);
+        } 
+        // Manually get direction for human player
+        else {
+            do { 
+                direction = prompt("Enter " + shipName + " orientation (h or v)");
+                if (direction == 'h' || direction == 'v') {
+                    check = 1;
+                }
+            } while(check != 1);
+        }
         return direction;
     }
 
@@ -81,16 +91,24 @@ class Gameboard {
     getPlacement() {
         let row;
         let col; 
-        do {
-            row = parseInt(prompt("Enter row"));
-        } while (row < 0 || row > 9)
-        do {
-            col = parseInt(prompt("Enter column"));
-        } while (col < 0 || col > 9)
+        // Generate random coordinates for a computer player
+        if (this.CPU == true) {
+            console.log("CPU is placing")
+            row = Math.floor(Math.random() * 10);
+            col = Math.floor(Math.random() * 10);
+        } else {
+            // Get coordinates from human player
+            do {
+                row = parseInt(prompt("Enter row"));
+            } while (row < 0 || row > 9)
+            do {
+                col = parseInt(prompt("Enter column"));
+            } while (col < 0 || col > 9)
+        }
         return [row, col];
     };
 
-    // Get the spaces the ship would occupy
+    // Get the spaces the ship would occupy for legality check
     getProposedSpaces(orientation, placement, shipLength) {
         let proposedSpaces = [];
         for (let j = 0; j < shipLength; j++) {
@@ -131,64 +149,45 @@ class Gameboard {
                 return true;
             }
         }
-        // console.log("No conflict")
         return false;
     }
 
-    receiveAttack() {
-        // Get attack's coordinates
-        let attackCoord;
-        let targetedSquare;
-        do { 
-            attackCoord =  this.getAttackCoord();
-            console.log("Firing: " + attackCoord);
-            targetedSquare = this.allSpaces[attackCoord[0]][attackCoord[1]];
-            if (targetedSquare.tried == true) {
-                console.log("Square already played! Try again!")
-            }
-        } while (targetedSquare.tried == true)
-        // Update targeted square so it can't be hit again
+    receiveAttack(attackCoord) {
+        let targetedSquare = this.allSpaces[attackCoord[0]][attackCoord[1]];
+        // Update targeted square for display
         targetedSquare.tried = true
         // Check if attack hits a ship
         if (targetedSquare.contains == null) {
             // If miss, push coordinates to missedShots array
             this.missedShots.push(attackCoord);
             console.log("Miss!")
-            //console.log(this.missedShots)
         } else {
-            // If hit, run hit() function on affected ship
+            // If hit, run hit() function on affected ship and check if it is sunk
             console.log(targetedSquare.contains.name + " hit!")
             targetedSquare.contains.hit();
             targetedSquare.contains.isSunk();
-            // console.log(targetedSquare.contains);
             if (targetedSquare.contains.sunk == true) {
                 console.log(targetedSquare.contains.name + " sunk!");
             }
         }
     }
 
-    getAttackCoord() {
-        let row;
-        let col; 
-        do {
-            row = parseInt(prompt("Enter attack row"));
-        } while (row < 0 || row > 9 || isNaN(row))
-        do {
-            col = parseInt(prompt("Enter attack column"));
-        } while (col < 0 || col > 9 || isNaN(row))
+    // Randomly generate coordinates for CPU ship placement
+    getCoordForCPU() {
+        let row = Math.floor(Math.random() * 10);
+        let col = Math.floor(Math.random() * 10);
         return [row, col];
     }
 
+    // Check status of all ships to determine if game is over
     isFleetSunk() {
         let sunkShips = 0;
         for (let i = 0; i < this.fleet.length; i++) {
-            // console.log(this.fleet[i].sunk) 
             if (this.fleet[i].sunk == true) {
                 sunkShips++
             }
         }
         if (sunkShips == this.fleet.length) {
-            //console.log("All ships sunk!");
             return true;
         } else {
             return false;
