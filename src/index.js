@@ -4,6 +4,9 @@ import './style.css';
 // import { Ship } from "./shipFactory.js";
 // import { Gameboard } from "./gameboardFactory";
 import { drawStartScreen } from "./drawStartScreen";
+import { clearContent } from './clearContent';
+import { drawGameScreen } from "./drawGameScreen";
+import { gameloop } from './gameloop';
 import { Player } from './playerFactory';
 
 // testFunction();
@@ -17,11 +20,10 @@ startScreenBase.addEventListener('submit', (event) => {
     event.preventDefault();
     console.log("Start game!");
     let player1 = new Player(player1NameInput.value, player1AICheckbox.checked);
-    console.log(player1.name);
-    console.log(player1.isCPU);
     let player2 = new Player(player2NameInput.value, player2AICheckbox.checked);
-    console.log(player2.name);
-    console.log(player2.isCPU);
+    clearContent();
+    drawGameScreen();
+    gameloop(player1, player2);
 });
 
 
@@ -50,5 +52,3 @@ startScreenBase.addEventListener('submit', (event) => {
 //         break;
 //     }
 // } while (player1.gameBoard.isFleetSunk() == false && player2.gameBoard.isFleetSunk() == false)
-
-console.log("Game over")

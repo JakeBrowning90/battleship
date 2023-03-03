@@ -2,13 +2,13 @@ import { Player } from "./playerFactory";
 import { Ship } from "./shipFactory";
 
 class Gameboard {
-    constructor() {
+    constructor(cpuCheck) {
         this.allSpaces = this.generateSpaces();
         // this.occupiedSpaces = placeShips();
         this.occupiedSpaces = [];
         this.missedShots = [];
         this.fleet = [new Ship("Carrier", 5), new Ship("Battleship", 4), new Ship("Destroyer", 3), new Ship("Submarine", 3), new Ship("Patrol boat", 2)];
-        this.CPU = false;
+        this.CPU = cpuCheck;
     }
 
     generateSpaces() {
@@ -18,7 +18,7 @@ class Gameboard {
             for (let j = 0; j < 10; j++) {
                 let cell = {};
                 cell.coord = `${i}, ${j}`;
-                cell.contains = null;
+                cell.contains = null; 
                 cell.tried = false;
                 // cell.row = i;
                 // cell.col = j;
@@ -34,6 +34,9 @@ class Gameboard {
     placeShips() {
         // For each ship:
         for (let i = 0; i < this.fleet.length; i++) {
+            const instructionDiv = document.querySelector(".instructionDiv");
+            instructionDiv.textContent = "Place " + this.fleet[i].name + " (" + this.fleet[i].length + " tiles long)";
+            // instructionDiv.textContent = "Place " + fleet[i].name + " ("+fleet[i].length + ") tiles" ;
             // Get coordinates and horizontal/vertical orientation
             let orientation;
             // Get prospective placement 

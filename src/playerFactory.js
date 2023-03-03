@@ -4,11 +4,11 @@ class Player {
     constructor(name, cpuCheck) {
         this.name = name;
         this.isCPU = cpuCheck;
-        this.gameBoard = new Gameboard;
+        this.gameBoard = new Gameboard(cpuCheck);
         this.moveHistory = [];
     }
 
-    // TBA: have CPU determined with toggle instead of name
+    // OBSOLETE, is CPU now determined by checkbox
     isCPUcheck() {
         if (this.name.includes("CPU")) {
             this.isCPU = true;
