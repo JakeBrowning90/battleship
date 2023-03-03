@@ -1,9 +1,9 @@
 import { Gameboard } from "./gameboardFactory";
 
 class Player {
-    constructor(name) {
+    constructor(name, cpuCheck) {
         this.name = name;
-        this.isCPU = false;
+        this.isCPU = cpuCheck;
         this.gameBoard = new Gameboard;
         this.moveHistory = [];
     }
