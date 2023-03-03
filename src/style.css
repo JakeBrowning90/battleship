@@ -21,7 +21,7 @@ html, body {
 .startScreenBase {
     height: 50%;
     width: 50%;
-    background-color: aquamarine;
+    background-color: #7fa8ff;
     padding: 10px;
     display: grid;
     grid-template-rows: 2fr repeat(5, 1fr);
