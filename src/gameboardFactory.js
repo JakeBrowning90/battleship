@@ -44,9 +44,14 @@ class Gameboard {
             let proposedSpaces;
             do {
                 do {
-                    orientation = this.getOrientation(this.fleet[i].name);
-                    placement = this.getPlacement(this.fleet[i].length, orientation);
-                    //console.log(placement);
+                    // orientation = this.getOrientation(this.fleet[i].name);
+                    // placement = this.getPlacement(this.fleet[i].length, orientation);
+                    
+                    // AUTOMATIC PLACEMENT FOR DOM TESTS
+                    orientation = "h";
+                    placement = [i, i];
+
+
                 // Check that placement is on board 
                 } while ((this.isShipOnBoard(placement, this.fleet[i].length, orientation) == false));
                 proposedSpaces = this.getProposedSpaces(orientation, placement, this.fleet[i].length);
@@ -62,6 +67,14 @@ class Gameboard {
             } 
             // Add newly filled spaces to list of all filled spaces
             this.occupiedSpaces.push(...proposedSpaces);
+        }
+    }
+
+    drawTiles(board) {
+        for (let i = 0; i < 100; i++) {
+            let tile = document.createElement("div");
+            tile.classList.add("tile");
+            board.appendChild(tile);
         }
     }
 

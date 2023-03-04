@@ -40,13 +40,14 @@ function drawGameScreen() {
     player2Grid.classList.add("grid");
 
     //Fill gameboard with 100 tiles
-    function drawTiles(board) {
-        for (let i = 0; i < 100; i++) {
-            let tile = document.createElement("div");
-            tile.classList.add("tile");
-            board.appendChild(tile);
-        }
-    }
+    // function drawTiles(board) {
+    //     for (let i = 0; i < 100; i++) {
+    //         let tile = document.createElement("div");
+    //         tile.classList.add("tile");
+    //         board.appendChild(tile);
+    //     }
+    // }
+
     // Populate edges of grid with numbers
     function drawMarkers(board) {
         let corner = document.createElement("div");
@@ -77,14 +78,14 @@ function drawGameScreen() {
     player1Half.appendChild(player1Fleet);
     // player1Half.appendChild(corner);
     player1Half.appendChild(player1Grid);
-    drawTiles(player1Grid);
+    // drawTiles(player1Grid);
     drawMarkers(player1Half)
 
     gameScreenBase.appendChild(player2Half);
     player2Half.appendChild(player2Fleet);
     // player1Half.appendChild(corner);
     player2Half.appendChild(player2Grid);
-    drawTiles(player2Grid);
+    // drawTiles(player2Grid);
     drawMarkers(player2Half);
 
     //Function to fill banner with ship placement form

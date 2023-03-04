@@ -5,7 +5,10 @@ function gameloop(player1, player2) {
     // alert(player1.name + ", place ships");
     player1.gameBoard.placeShips();
     // alert(player2.name + ", place ships");
-    // player2.gameBoard.placeShips();
+    player2.gameBoard.placeShips();
+    //Confirm 
+    console.log(player1.gameBoard);
+    console.log(player2.gameBoard);
 
     // do {
     //     //alert(player1.name + ", enter attack coordinates");
