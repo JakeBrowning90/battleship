@@ -94,19 +94,24 @@ class Gameboard {
                     tile.classList.add("hasShip"); 
                 }
 
-                // Turn tiles red if clicked and has ship
-                tile.addEventListener('mousedown', function(e) {
-                    if(e.target.classList.contains("hasShip")) {
-                        tile.classList.remove("hasShip"); 
-                        tile.classList.add("struckShip"); 
-                    } else if (!e.target.classList.contains("hasShip") && !e.target.classList.contains("struckShip")) {
-                        tile.classList.add("missedShot"); 
-                    }
-                });
-
-                tile.addEventListener('click', () => {
-                    this.receiveAttack([i, j]);
-                });
+              
+                    // Turn tiles red if clicked and has ship, blue if clicked and no ship
+                    tile.addEventListener('mousedown', function(e) {
+                        if (e.target.classList.contains("hasShip")) {
+                            tile.classList.remove("hasShip"); 
+                            tile.classList.add("struckShip"); 
+                        } else if (!e.target.classList.contains("hasShip") && !e.target.classList.contains("struckShip")) {
+                            tile.classList.add("missedShot"); 
+                        } 
+                    });
+                    
+                    //Only run receiveAttack if square hasn't been tried yet
+                    tile.addEventListener('click', () => {
+                        if (this.allSpaces[i][j].tried == false) {
+                            this.receiveAttack([i, j]);
+                        }
+                    });
+                
 
                 if (this.allSpaces[i][j].contains != null) {
                     tile.classList.add("hasShip"); 
@@ -225,6 +230,7 @@ class Gameboard {
                 console.log(targetedSquare.contains.name + " sunk!");
             }
         }
+        this.isFleetSunk();
     }
 
     // Randomly generate coordinates for CPU ship placement
@@ -243,6 +249,7 @@ class Gameboard {
             }
         }
         if (sunkShips == this.fleet.length) {
+            console.log("All ships sunk!")
             return true;
         } else {
             return false;
