@@ -12,9 +12,10 @@ function gameloop(player1, player2) {
     // alert(player2.name + ", place ships");
     player2.gameBoard.placeShips();
     player2.gameBoard.drawTiles(player2Grid);
-    //Confirm 
-    // console.log(player1.gameBoard);
-    // console.log(player2.gameBoard);
+
+    //TODO: set properties for gameboard on active turns, logic to alernate turns
+
+    
 
     // do {
     //     //alert(player1.name + ", enter attack coordinates");

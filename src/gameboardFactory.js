@@ -9,6 +9,8 @@ class Gameboard {
         this.missedShots = [];
         this.fleet = [new Ship("Carrier", 5), new Ship("Battleship", 4), new Ship("Destroyer", 3), new Ship("Submarine", 3), new Ship("Patrol boat", 2)];
         this.CPU = cpuCheck;
+        //TODO: property to enable clicks on player's turn / disable on opponent's turn
+        this.isActiveBoard = false
     }
 
     generateSpaces() {
@@ -71,7 +73,7 @@ class Gameboard {
     }
 
 
-    // TODO: draw tiles for each space in this.allSpaces
+    // TODO: draw tiles for each space in this.allSpaces - DONE!
     drawTiles(board) {
         // Placeholder static grid
         // for (let i = 0; i < 100; i++) {
@@ -109,6 +111,7 @@ class Gameboard {
                     tile.addEventListener('click', () => {
                         if (this.allSpaces[i][j].tried == false) {
                             this.receiveAttack([i, j]);
+                            this.isFleetSunk();
                         }
                     });
                 
@@ -230,7 +233,6 @@ class Gameboard {
                 console.log(targetedSquare.contains.name + " sunk!");
             }
         }
-        this.isFleetSunk();
     }
 
     // Randomly generate coordinates for CPU ship placement
