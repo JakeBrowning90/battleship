@@ -36,8 +36,10 @@ function drawGameScreen() {
 
     const player1Grid = document.createElement("div");
     player1Grid.classList.add("grid");
+    player1Grid.setAttribute("id", "player1Grid");
     const player2Grid = document.createElement("div");
     player2Grid.classList.add("grid");
+    player2Grid.setAttribute("id", "player2Grid");
 
     //Fill gameboard with 100 tiles
     // function drawTiles(board) {
