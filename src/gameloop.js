@@ -13,8 +13,8 @@ function gameloop(player1, player2) {
     player2.gameBoard.placeShips();
     player2.gameBoard.drawTiles(player2Grid);
     //Confirm 
-    console.log(player1.gameBoard);
-    console.log(player2.gameBoard);
+    // console.log(player1.gameBoard);
+    // console.log(player2.gameBoard);
 
     // do {
     //     //alert(player1.name + ", enter attack coordinates");

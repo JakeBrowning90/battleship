@@ -70,11 +70,50 @@ class Gameboard {
         }
     }
 
+
+    // TODO: draw tiles for each space in this.allSpaces
     drawTiles(board) {
-        for (let i = 0; i < 100; i++) {
-            let tile = document.createElement("div");
-            tile.classList.add("tile");
-            board.appendChild(tile);
+        // Placeholder static grid
+        // for (let i = 0; i < 100; i++) {
+        //     let tile = document.createElement("div");
+        //     tile.classList.add("tile");
+        //     board.appendChild(tile);
+        // }
+
+        // Grid from gameboard Object
+        for (let i = 0; i < 10; i++) {
+            for (let j = 0; j < 10; j++) {
+                // let cell = {};
+                // cell.coord = `${i}, ${j}`;
+                // cell.contains = null; 
+                // cell.tried = false;
+                // row[j] = cell;
+                const tile = document.createElement("div");
+                tile.classList.add("tile");
+                if (this.allSpaces[i][j].contains != null) {
+                    tile.classList.add("hasShip"); 
+                }
+
+                // Turn tiles red if clicked and has ship
+                tile.addEventListener('mousedown', function(e) {
+                    if(e.target.classList.contains("hasShip")) {
+                        tile.classList.remove("hasShip"); 
+                        tile.classList.add("struckShip"); 
+                    } else if (!e.target.classList.contains("hasShip") && !e.target.classList.contains("struckShip")) {
+                        tile.classList.add("missedShot"); 
+                    }
+                });
+
+                tile.addEventListener('click', () => {
+                    this.receiveAttack([i, j]);
+                });
+
+                if (this.allSpaces[i][j].contains != null) {
+                    tile.classList.add("hasShip"); 
+                }
+                board.appendChild(tile);
+        
+            }
         }
     }
 
