@@ -9,14 +9,15 @@ class Player {
     }
 
     // OBSOLETE, is CPU now determined by checkbox
-    isCPUcheck() {
-        if (this.name.includes("CPU")) {
-            this.isCPU = true;
-            console.log("CPU player ready")
-            this.gameBoard.CPU = true;
-        } 
-    }
+    // isCPUcheck() {
+    //     if (this.name.includes("CPU")) {
+    //         this.isCPU = true;
+    //         console.log("CPU player ready")
+    //         this.gameBoard.CPU = true;
+    //     } 
+    // }
 
+    // OBSOLETE with tile event listeners? Modify to be the the AI's attack input.
     getPlayerAttack() {
         let attack;
         let row;

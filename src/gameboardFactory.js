@@ -22,10 +22,6 @@ class Gameboard {
                 cell.coord = `${i}, ${j}`;
                 cell.contains = null; 
                 cell.tried = false;
-                // cell.row = i;
-                // cell.col = j;
-                // Give each cell a "contains" property to indicate which ship is there?
-                // cell.contains = null;
                 row[j] = cell;
             }
             playfield[i] = row;
@@ -72,55 +68,35 @@ class Gameboard {
         }
     }
 
-
-    // TODO: draw tiles for each space in this.allSpaces - DONE!
     drawTiles(board) {
-        // Placeholder static grid
-        // for (let i = 0; i < 100; i++) {
-        //     let tile = document.createElement("div");
-        //     tile.classList.add("tile");
-        //     board.appendChild(tile);
-        // }
 
         // Grid from gameboard Object
         for (let i = 0; i < 10; i++) {
             for (let j = 0; j < 10; j++) {
-                // let cell = {};
-                // cell.coord = `${i}, ${j}`;
-                // cell.contains = null; 
-                // cell.tried = false;
-                // row[j] = cell;
                 const tile = document.createElement("div");
                 tile.classList.add("tile");
+                tile.setAttribute("id", `${[i, j]}`);
+
                 if (this.allSpaces[i][j].contains != null) {
                     tile.classList.add("hasShip"); 
                 }
 
-              
-                    // Turn tiles red if clicked and has ship, blue if clicked and no ship
-                    tile.addEventListener('mousedown', function(e) {
-                        if (e.target.classList.contains("hasShip")) {
-                            tile.classList.remove("hasShip"); 
-                            tile.classList.add("struckShip"); 
-                        } else if (!e.target.classList.contains("hasShip") && !e.target.classList.contains("struckShip")) {
-                            tile.classList.add("missedShot"); 
-                        } 
-                    });
-                    
-                    //Only run receiveAttack if square hasn't been tried yet
-                    tile.addEventListener('click', () => {
+                //TEST: only enable Eventlisteners for activePlayer
+            
+                //Only execute receiveAttack & update tile if board is active AND square hasn't been tried yet
+                tile.addEventListener('click', () => {
+                    if (this.isActiveBoard == true) {
                         if (this.allSpaces[i][j].tried == false) {
                             this.receiveAttack([i, j]);
+                            this.updateTile(tile.id);
                             this.isFleetSunk();
+                            // TODO: Alert other gameboard to switch to active
+                            this.isActiveBoard = false;
                         }
-                    });
-                
+                    }
+                });
 
-                if (this.allSpaces[i][j].contains != null) {
-                    tile.classList.add("hasShip"); 
-                }
                 board.appendChild(tile);
-        
             }
         }
     }
@@ -233,6 +209,17 @@ class Gameboard {
                 console.log(targetedSquare.contains.name + " sunk!");
             }
         }
+    }
+
+    // Modify appearance of clicked tiles
+    updateTile(tileID) {
+        let tile  = document.getElementById(tileID);
+        if (tile.classList.contains("hasShip")) {
+            tile.classList.remove("hasShip"); 
+            tile.classList.add("struckShip"); 
+        } else if (!tile.classList.contains("hasShip") && !tile.classList.contains("struckShip")) {
+            tile.classList.add("missedShot"); 
+        } 
     }
 
     // Randomly generate coordinates for CPU ship placement
