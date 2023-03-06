@@ -19,31 +19,8 @@ function gameloop(player1, player2) {
     player2.gameBoard.placeShips();
     drawTiles(player2, player2Grid, player1);
 
-    //TODO: set properties for gameboard on active turns, logic to alernate turns
-    // if (player1.isTurn == true) {
-    //     player1.gameBoard.isActiveBoard = false;
-        player2.gameBoard.isActiveBoard = true;
-    // } else if (player2.isTurn == true) {
-    //     player2.gameBoard.isActiveBoard = false;
-        // player1.gameBoard.isActiveBoard = true;
-    // }
+    player2.gameBoard.isActiveBoard = true;
 
-    // player1.isTurn = true;
-    // do {
-    //     //alert(player1.name + ", enter attack coordinates");
-    //     player2.gameBoard.receiveAttack(player1.getPlayerAttack());
-    //     if (player2.gameBoard.isFleetSunk() == true) {
-    //         console.log(player1.name + " wins!");
-    //         break;
-    //     }
-    //     //alert(player2.name + ", enter attack coordinates");
-    //     player1.gameBoard.receiveAttack(player2.getPlayerAttack());
-    //     if (player1.gameBoard.isFleetSunk() == true) {
-    //         console.log(player2.name + " wins!")
-    //         break;
-    //     }
-    // } while (player1.gameBoard.isFleetSunk() == false && player2.gameBoard.isFleetSunk() == false)
-    
     function drawTiles(defender, board, attacker) {
         // Grid from gameboard Object
         for (let i = 0; i < 10; i++) {
