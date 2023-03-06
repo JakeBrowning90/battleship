@@ -45,7 +45,7 @@ class Player {
         } while (this.moveHistory.includes(`${row}, ${col}`))
         // Add legal move to player's history
         this.moveHistory.push(`${row}, ${col}`);
-        console.log(this.name + " fires at " + attack);
+        // console.log(this.name + " fires at " + attack);
         return attack;
      }
 }

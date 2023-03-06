@@ -27,8 +27,10 @@ function drawGameScreen() {
     player2Board.classList.add("playerBoard");
 
     const player1Fleet = document.createElement("div");
+    player1Fleet.setAttribute("id", "player1Fleet");
     player1Fleet.classList.add("fleetStatus");
     const player2Fleet = document.createElement("div");
+    player2Fleet.setAttribute("id", "player2Fleet");
     player2Fleet.classList.add("fleetStatus");
 
     // const corner = document.createElement("div");
@@ -40,15 +42,6 @@ function drawGameScreen() {
     const player2Grid = document.createElement("div");
     player2Grid.classList.add("grid");
     player2Grid.setAttribute("id", "player2Grid");
-
-    //Fill gameboard with 100 tiles
-    // function drawTiles(board) {
-    //     for (let i = 0; i < 100; i++) {
-    //         let tile = document.createElement("div");
-    //         tile.classList.add("tile");
-    //         board.appendChild(tile);
-    //     }
-    // }
 
     // Populate edges of grid with numbers
     function drawMarkers(board) {

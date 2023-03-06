@@ -42,12 +42,12 @@ class Gameboard {
             let proposedSpaces;
             do {
                 do {
-                    // orientation = this.getOrientation(this.fleet[i].name);
-                    // placement = this.getPlacement(this.fleet[i].length, orientation);
+                    orientation = this.getOrientation(this.fleet[i].name);
+                    placement = this.getPlacement(this.fleet[i].length, orientation);
                     
                     // AUTOMATIC PLACEMENT FOR DOM TESTS
-                    orientation = "h";
-                    placement = [i, i];
+                    // orientation = "h";
+                    // placement = [i, i];
 
 
                 // Check that placement is on board 
@@ -65,39 +65,6 @@ class Gameboard {
             } 
             // Add newly filled spaces to list of all filled spaces
             this.occupiedSpaces.push(...proposedSpaces);
-        }
-    }
-
-    drawTiles(board) {
-
-        // Grid from gameboard Object
-        for (let i = 0; i < 10; i++) {
-            for (let j = 0; j < 10; j++) {
-                let tile = document.createElement("div");
-                tile.classList.add("tile");
-                tile.setAttribute("id", `${[i, j]}`);
-
-                if (this.allSpaces[i][j].contains != null) {
-                    tile.classList.add("hasShip"); 
-                }
-
-                //TEST: only enable Eventlisteners for activePlayer
-            
-                //Only execute receiveAttack & update tile if board is active AND square hasn't been tried yet
-                tile.addEventListener('click', () => {
-                    if (this.isActiveBoard == true) {
-                        if (this.allSpaces[i][j].tried == false) {
-                            this.receiveAttack([i, j]);
-                            this.updateTile(tile);
-                            this.isFleetSunk();
-                            // TODO: Alert other gameboard to switch to active
-                            // this.isActiveBoard = false;
-                        }
-                    }
-                });
-
-                board.appendChild(tile);
-            }
         }
     }
 
