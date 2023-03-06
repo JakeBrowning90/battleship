@@ -14,14 +14,15 @@ function gameloop(player1, player2) {
     player2.gameBoard.drawTiles(player2Grid);
 
     //TODO: set properties for gameboard on active turns, logic to alernate turns
-    player1.gameBoard.isActiveBoard = true;
-
-    // while (player1.gameBoard.isFleetSunk() == false && player2.gameBoard.isFleetSunk() == false) {
-    //     if (player1.gameBoard.isActiveBoard == false) {
-    //         player2.gameBoard.isActiveBoard = true;
-    //     }
+    // if (player1.isTurn == true) {
+    //     player1.gameBoard.isActiveBoard = false;
+        player2.gameBoard.isActiveBoard = true;
+    // } else if (player2.isTurn == true) {
+    //     player2.gameBoard.isActiveBoard = false;
+        player1.gameBoard.isActiveBoard = true;
     // }
 
+    // player1.isTurn = true;
     // do {
     //     //alert(player1.name + ", enter attack coordinates");
     //     player2.gameBoard.receiveAttack(player1.getPlayerAttack());

@@ -73,7 +73,7 @@ class Gameboard {
         // Grid from gameboard Object
         for (let i = 0; i < 10; i++) {
             for (let j = 0; j < 10; j++) {
-                const tile = document.createElement("div");
+                let tile = document.createElement("div");
                 tile.classList.add("tile");
                 tile.setAttribute("id", `${[i, j]}`);
 
@@ -88,10 +88,10 @@ class Gameboard {
                     if (this.isActiveBoard == true) {
                         if (this.allSpaces[i][j].tried == false) {
                             this.receiveAttack([i, j]);
-                            this.updateTile(tile.id);
+                            this.updateTile(tile);
                             this.isFleetSunk();
                             // TODO: Alert other gameboard to switch to active
-                            this.isActiveBoard = false;
+                            // this.isActiveBoard = false;
                         }
                     }
                 });
@@ -191,6 +191,7 @@ class Gameboard {
         return false;
     }
 
+    // Update gameboard Object properties for occupied and unoccupied tiles
     receiveAttack(attackCoord) {
         let targetedSquare = this.allSpaces[attackCoord[0]][attackCoord[1]];
         // Update targeted square for display
@@ -212,8 +213,8 @@ class Gameboard {
     }
 
     // Modify appearance of clicked tiles
-    updateTile(tileID) {
-        let tile  = document.getElementById(tileID);
+    updateTile(tile) {
+        // let tile  = document.getElementById(attackCoord);
         if (tile.classList.contains("hasShip")) {
             tile.classList.remove("hasShip"); 
             tile.classList.add("struckShip"); 

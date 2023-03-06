@@ -6,6 +6,7 @@ class Player {
         this.isCPU = cpuCheck;
         this.gameBoard = new Gameboard(cpuCheck);
         this.moveHistory = [];
+        this.isTurn = false;
     }
 
     // OBSOLETE, is CPU now determined by checkbox
