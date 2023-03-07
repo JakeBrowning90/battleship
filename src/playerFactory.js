@@ -1,10 +1,11 @@
 import { Gameboard } from "./gameboardFactory";
 
 class Player {
-    constructor(name, cpuCheck) {
+    constructor(name, cpuCheck, autoPlaceCheck) {
         this.name = name;
         this.isCPU = cpuCheck;
-        this.gameBoard = new Gameboard(cpuCheck);
+        this.autoPlace = autoPlaceCheck;
+        this.gameBoard = new Gameboard(cpuCheck, autoPlaceCheck);
         this.moveHistory = [];
         this.isTurn = false;
     }

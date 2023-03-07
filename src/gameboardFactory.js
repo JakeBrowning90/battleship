@@ -2,13 +2,14 @@ import { Player } from "./playerFactory";
 import { Ship } from "./shipFactory";
 
 class Gameboard {
-    constructor(cpuCheck) {
+    constructor(cpuCheck, autoPlaceCheck) {
         this.allSpaces = this.generateSpaces();
         // this.occupiedSpaces = placeShips();
         this.occupiedSpaces = [];
         this.missedShots = [];
         this.fleet = [new Ship("Carrier", 5), new Ship("Battleship", 4), new Ship("Destroyer", 3), new Ship("Submarine", 3), new Ship("Patrol boat", 2)];
         this.CPU = cpuCheck;
+        this.autoPlace = autoPlaceCheck;
         //TODO: property to enable clicks on player's turn / disable on opponent's turn
         this.isActiveBoard = false
     }
@@ -73,7 +74,7 @@ class Gameboard {
         let direction;
         let check;
         // Randomly determine direction for CPU 
-        if (this.CPU == true) {
+        if (this.autoPlace == true || this.CPU == true) {
             let randomDirection = Math.floor(Math.random() * 2);
             if (randomDirection == 0) {
                 direction = 'h';
@@ -98,7 +99,7 @@ class Gameboard {
         let row;
         let col; 
         // Generate random coordinates for a computer player
-        if (this.CPU == true) {
+        if (this.autoPlace == true || this.CPU == true) {
             console.log("CPU is placing")
             row = Math.floor(Math.random() * 10);
             col = Math.floor(Math.random() * 10);
@@ -167,7 +168,7 @@ class Gameboard {
         if (targetedSquare.contains == null) {
             // If miss, push coordinates to missedShots array
             this.missedShots.push(attackCoord);
-            console.log("Miss!")
+            // console.log("Miss!")
         } else {
             // If hit, run hit() function on affected ship and check if it is sunk
             console.log(targetedSquare.contains.name + " hit!")

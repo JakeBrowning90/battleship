@@ -39,6 +39,7 @@ function gameloop(player1, player2) {
                         // ...that hasn't been clicked yet...
                         if (defender.gameBoard.allSpaces[i][j].tried == false) {
                             // ... send the attack...
+                            console.log(attacker.name + " fires at " + i + ", " + j)
                             defender.gameBoard.receiveAttack([i, j]);
                             // ... change the appearance of the tile
                             defender.gameBoard.updateTile(tile);
@@ -52,6 +53,7 @@ function gameloop(player1, player2) {
                             if (defender.isCPU == true) {
                                 // console.log("Now it's the CPU's turn")
                                 let cpuTry = defender.getPlayerAttack();
+                                console.log(defender.name + " fires at " + cpuTry[0] + ", " + cpuTry[1]);
                                 attacker.gameBoard.receiveAttack(cpuTry);
                                 let targetedTile = document.getElementById(cpuTry);
                                 attacker.gameBoard.updateTile(targetedTile);
