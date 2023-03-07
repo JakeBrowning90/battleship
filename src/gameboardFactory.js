@@ -100,7 +100,7 @@ class Gameboard {
         let col; 
         // Generate random coordinates for a computer player
         if (this.autoPlace == true || this.CPU == true) {
-            console.log("CPU is placing")
+            // console.log("CPU is placing")
             row = Math.floor(Math.random() * 10);
             col = Math.floor(Math.random() * 10);
         } else {
@@ -168,6 +168,7 @@ class Gameboard {
         if (targetedSquare.contains == null) {
             // If miss, push coordinates to missedShots array
             this.missedShots.push(attackCoord);
+            return null;
             // console.log("Miss!")
         } else {
             // If hit, run hit() function on affected ship and check if it is sunk
@@ -177,6 +178,7 @@ class Gameboard {
             if (targetedSquare.contains.sunk == true) {
                 console.log(targetedSquare.contains.name + " sunk!");
             }
+            return targetedSquare.contains.name;
         }
     }
 
