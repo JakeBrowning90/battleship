@@ -33,9 +33,10 @@ class Gameboard {
     placeShips() {
         // For each ship:
         for (let i = 0; i < this.fleet.length; i++) {
-            const instructionDiv = document.querySelector(".instructionDiv");
-            instructionDiv.textContent = "Place " + this.fleet[i].name + " (" + this.fleet[i].length + " tiles long)";
+            // const instructionDiv = document.querySelector(".instructionDiv");
+            // instructionDiv.textContent = "Place " + this.fleet[i].name + " (" + this.fleet[i].length + " tiles long)";
             // instructionDiv.textContent = "Place " + fleet[i].name + " ("+fleet[i].length + ") tiles" ;
+
             // Get coordinates and horizontal/vertical orientation
             let orientation;
             // Get prospective placement 
@@ -49,8 +50,7 @@ class Gameboard {
                     // AUTOMATIC PLACEMENT FOR DOM TESTS
                     // orientation = "h";
                     // placement = [i, i];
-
-
+                    
                 // Check that placement is on board 
                 } while ((this.isShipOnBoard(placement, this.fleet[i].length, orientation) == false));
                 proposedSpaces = this.getProposedSpaces(orientation, placement, this.fleet[i].length);
@@ -160,7 +160,7 @@ class Gameboard {
     }
 
     // Update gameboard Object properties for occupied and unoccupied tiles
-    receiveAttack(attackCoord) {
+    receiveAttack(attackCoord, lastAttackDiv) {
         let targetedSquare = this.allSpaces[attackCoord[0]][attackCoord[1]];
         // Update targeted square for display
         targetedSquare.tried = true
@@ -168,15 +168,18 @@ class Gameboard {
         if (targetedSquare.contains == null) {
             // If miss, push coordinates to missedShots array
             this.missedShots.push(attackCoord);
+            lastAttackDiv.textContent = "Miss!"
             return null;
             // console.log("Miss!")
         } else {
             // If hit, run hit() function on affected ship and check if it is sunk
             console.log(targetedSquare.contains.name + " hit!")
+            lastAttackDiv.textContent = targetedSquare.contains.name + " hit!"
             targetedSquare.contains.hit();
             targetedSquare.contains.isSunk();
             if (targetedSquare.contains.sunk == true) {
-                console.log(targetedSquare.contains.name + " sunk!");
+                lastAttackDiv.textContent = targetedSquare.contains.name + " sunk!";
+                // console.log(targetedSquare.contains.name + " sunk!");
             }
             return targetedSquare.contains.name;
         }
@@ -184,7 +187,7 @@ class Gameboard {
 
     // Modify appearance of clicked tiles
     updateTile(tile) {
-        // let tile  = document.getElementById(attackCoord);
+
         if (tile.classList.contains("hasShip")) {
             tile.classList.remove("hasShip"); 
             tile.classList.add("struckShip"); 

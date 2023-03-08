@@ -82,7 +82,7 @@ html, body {
     box-sizing: border-box;
     display: grid;
     grid-template-columns: 3fr repeat(11, 1fr);
-    grid-template-rows:repeat(11, 1fr);
+    grid-template-rows:1fr repeat(11, 1fr);
 }
 
 .player1Half {
@@ -99,12 +99,17 @@ html, body {
 }
 
 .corner {
-    grid-row: 1 / 2;
+    grid-row: 2 / 3;
     grid-column: 2 / 3;
     height: 100%;
     width: 100%;
     box-sizing: border-box;
     border: 1px solid black;
+}
+
+.lastAttack {
+    background-color: pink;
+    grid-column: 2 / -1;
 }
 
 .navMarker {
@@ -120,7 +125,7 @@ html, body {
 .grid {
     box-sizing: border-box;
     background-color: whitesmoke;
-    grid-row: 2 / -1;
+    grid-row: 3 / -1;
     grid-column: 3 / -1;
     height: 100%;
     width: 100%;
@@ -137,7 +142,7 @@ html, body {
 }
 
 .hasShip {
-    background-color: green;
+    /* background-color: rgba(31, 126, 31, 0.564); */
 }
 
 .struckShip {

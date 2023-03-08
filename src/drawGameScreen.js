@@ -8,6 +8,7 @@ function drawGameScreen() {
 
     // Top portion of game screen
     const gameInfoBanner = document.createElement("div");
+    gameInfoBanner.setAttribute("id", "gameInfoBanner");
     gameInfoBanner.classList.add("gameInfoBanner");
     
     // const instructionDiv = document.createElement("div");
@@ -33,8 +34,12 @@ function drawGameScreen() {
     player2Fleet.setAttribute("id", "player2Fleet");
     player2Fleet.classList.add("fleetStatus");
 
-    // const corner = document.createElement("div");
-    // corner.classList.add("corner");
+    const player1LastAttack = document.createElement("div");
+    player1LastAttack.setAttribute("id", "player1LastAttack");
+    player1LastAttack.classList.add("lastAttack");
+    const player2LastAttack = document.createElement("div");
+    player2LastAttack.setAttribute("id", "player2LastAttack");
+    player2LastAttack.classList.add("lastAttack");
 
     const player1Grid = document.createElement("div");
     player1Grid.classList.add("grid");
@@ -71,20 +76,18 @@ function drawGameScreen() {
 
     gameScreenBase.appendChild(player1Half);
     player1Half.appendChild(player1Fleet);
-    // player1Half.appendChild(corner);
+    player1Half.appendChild(player1LastAttack);
     player1Half.appendChild(player1Grid);
-    // drawTiles(player1Grid);
     drawMarkers(player1Half)
 
     gameScreenBase.appendChild(player2Half);
     player2Half.appendChild(player2Fleet);
-    // player1Half.appendChild(corner);
+    player2Half.appendChild(player2LastAttack);
     player2Half.appendChild(player2Grid);
-    // drawTiles(player2Grid);
     drawMarkers(player2Half);
 
     //Function to fill banner with ship placement form
-    drawShipPlacer();
+    // drawShipPlacer();
 }
 
 export {drawGameScreen}
