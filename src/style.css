@@ -83,6 +83,9 @@ html, body {
     display: grid;
     grid-template-columns: 3fr repeat(11, 1fr);
     grid-template-rows:1fr repeat(11, 1fr);
+    height: 60vh;
+    width: 60vh;
+    place-self: center;
 }
 
 .player1Half {

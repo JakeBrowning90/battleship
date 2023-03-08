@@ -53,7 +53,11 @@ function gameloop(player1, player2) {
                             //If playing against CPU, let CPU make turn
                             else if (defender.isCPU == true && !defender.gameBoard.isFleetSunk()) {
                                 let cpuTry = defender.getPlayerAttack();
-                                attacker.gameBoard.receiveAttack(cpuTry, player1LastAttack);
+                                if (attacker.gameBoard.receiveAttack(cpuTry, player1LastAttack)!= null) {
+                                    defender.lastHit = cpuTry;
+                                }
+                                //TODO: logic to have CPU try shots near last successful hit (what if the last hit sinks the ship?)
+                                // console.log(defender.lastHit);
                                 let targetedTile = document.getElementById(cpuTry);
                                 attacker.gameBoard.updateTile(targetedTile);
 
