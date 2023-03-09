@@ -7,6 +7,10 @@ html, body {
     width: 100%;
 }
 
+h1 {
+    font-size: 4vh;
+}
+
 #header, #footer {
     background-color: rgb(0, 0, 196);
 }
@@ -63,17 +67,16 @@ html, body {
 .gameInfoBanner {
     grid-column: 2 / -2;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 2fr repeat(3, 1fr);
-}
-
-.instructionDiv {
-    grid-column: 1 / -1;
+    grid-template-rows: 2fr 1fr 1fr;
 }
 
 .gameInfoBanner > * {
     border: 1px solid black;
     box-sizing: border-box;
+}
+
+.instructionDiv {
+    grid-column: 1 / -1;
 }
 
 .playerHalf {

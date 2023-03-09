@@ -173,7 +173,6 @@ class Gameboard {
             // console.log("Miss!")
         } else {
             // If hit, run hit() function on affected ship and check if it is sunk
-            console.log(targetedSquare.contains.name + " hit!")
             lastAttackDiv.textContent = targetedSquare.contains.name + " hit!"
             targetedSquare.contains.hit();
             targetedSquare.contains.isSunk();
@@ -186,14 +185,21 @@ class Gameboard {
     }
 
     // Modify appearance of clicked tiles
-    updateTile(tile) {
+    updateTile(tile, outcome) {
 
-        if (tile.classList.contains("hasShip")) {
-            tile.classList.remove("hasShip"); 
+        if (outcome != null) {
+            // tile.classList.remove("hasShip"); 
             tile.classList.add("struckShip"); 
-        } else if (!tile.classList.contains("hasShip") && !tile.classList.contains("struckShip")) {
+        } else {
             tile.classList.add("missedShot"); 
         } 
+
+        // if (tile.classList.contains("hasShip")) {
+        //     tile.classList.remove("hasShip"); 
+        //     tile.classList.add("struckShip"); 
+        // } else if (!tile.classList.contains("hasShip") && !tile.classList.contains("struckShip")) {
+        //     tile.classList.add("missedShot"); 
+        // } 
     }
 
     // Randomly generate coordinates for CPU ship placement

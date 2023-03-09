@@ -83,23 +83,19 @@ function drawStartScreen() {
 
     // Append form elements
     content.appendChild(startScreenBase);
-
     startScreenBase.appendChild(startScreenTitle);
-
     startScreenBase.appendChild(player1NameInputLabel);
-    startScreenBase.appendChild(player1AILabel);
     startScreenBase.appendChild(player1AutoPlaceLabel);
+    startScreenBase.appendChild(player1AILabel);
     startScreenBase.appendChild(player1NameInput);
-    startScreenBase.appendChild(player1AICheckbox);
     startScreenBase.appendChild(player1AutoPlaceCheckbox);
-
+    startScreenBase.appendChild(player1AICheckbox);
     startScreenBase.appendChild(player2NameInputLabel);
-    startScreenBase.appendChild(player2AILabel);
     startScreenBase.appendChild(player2AutoPlaceLabel);
+    startScreenBase.appendChild(player2AILabel);
     startScreenBase.appendChild(player2NameInput);
-    startScreenBase.appendChild(player2AICheckbox);
     startScreenBase.appendChild(player2AutoPlaceCheckbox);
-
+    startScreenBase.appendChild(player2AICheckbox);
     startScreenBase.appendChild(startGameBtn);
 }
 

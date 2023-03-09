@@ -1,6 +1,6 @@
 function gameloop(player1, player2) {
 
-    // const gameInfoBanner = document.querySelector("#gameInfoBanner");
+    const gameInfoBanner = document.querySelector("#gameInfoBanner");
 
     const player1Grid = document.querySelector("#player1Grid");
     const player2Grid = document.querySelector("#player2Grid");
@@ -14,13 +14,21 @@ function gameloop(player1, player2) {
     player1Fleet.textContent = player1.name + "'s fleet";
     player2Fleet.textContent = player2.name + "'s fleet";
 
-    // alert(player1.name + ", place ships");
+    if (player1.autoPlace == false) {
+        alert(player1.name + ", place ships");
+    }
     player1.gameBoard.placeShips();
-    drawTiles(player1, player1Grid, player1LastAttack, player2);
-    // alert(player2.name + ", place ships");
+    if (player2.autoPlace == false) {
+        alert(player2.name + ", place ships");
+    }
     player2.gameBoard.placeShips();
+
+    drawTiles(player1, player1Grid, player1LastAttack, player2);
     drawTiles(player2, player2Grid, player2LastAttack, player1);
 
+    gameInfoBanner.textContent = player1.name + ", attack " + player2.name + "'s fleet!"
+
+    // Let player 1 attack first
     player2.gameBoard.isActiveBoard = true;
 
     function drawTiles(defender, board, lastAttackDiv, attacker) {
@@ -31,9 +39,10 @@ function gameloop(player1, player2) {
                 tile.classList.add("tile");
                 tile.setAttribute("id", `${[i, j]}`);
 
-                if (defender.gameBoard.allSpaces[i][j].contains != null) {
-                    tile.classList.add("hasShip"); 
-                }
+                // Class for visually confirming ship placement
+                // if (defender.gameBoard.allSpaces[i][j].contains != null) {
+                //     tile.classList.add("hasShip"); 
+                // }
 
                 //On clicking a tile:
                 tile.addEventListener('click', () => {
@@ -41,11 +50,11 @@ function gameloop(player1, player2) {
                         // ...that hasn't been clicked yet...
                         if (defender.gameBoard.allSpaces[i][j].tried == false) {
                             // ... send the attack...
-                            defender.gameBoard.receiveAttack([i, j], lastAttackDiv);
+                            let outcome = defender.gameBoard.receiveAttack([i, j], lastAttackDiv);
+                            console.log(outcome)
                             // ... change the appearance of the tile
-                            defender.gameBoard.updateTile(tile);
+                            defender.gameBoard.updateTile(tile, outcome);
                       
-                            // TODO: end game and change DOM with new game options
                             if (defender.gameBoard.isFleetSunk()) {
                                 endGame(attacker, defender);
                             }
@@ -53,21 +62,21 @@ function gameloop(player1, player2) {
                             //If playing against CPU, let CPU make turn
                             else if (defender.isCPU == true && !defender.gameBoard.isFleetSunk()) {
                                 let cpuTry = defender.getPlayerAttack();
-                                if (attacker.gameBoard.receiveAttack(cpuTry, player1LastAttack)!= null) {
-                                    defender.lastHit = cpuTry;
-                                }
-                                //TODO: logic to have CPU try shots near last successful hit (what if the last hit sinks the ship?)
-                                // console.log(defender.lastHit);
-                                let targetedTile = document.getElementById(cpuTry);
-                                attacker.gameBoard.updateTile(targetedTile);
 
-                                // TODO: end game and change DOM with new game options
+                                let outcome = attacker.gameBoard.receiveAttack(cpuTry, player1LastAttack);
+                                    console.log(outcome)
+                                //TODO: logic to have CPU try shots near last successful hit (what if the last hit sinks the ship?)
+
+                                let targetedTile = document.getElementById(cpuTry);
+                                attacker.gameBoard.updateTile(targetedTile, outcome);
+
                                 if (attacker.gameBoard.isFleetSunk()) {
                                     endGame(defender, attacker);
                                 }
                             }
                              //...if human opponent, lock the current board and unlock the opponent's board
                             else if (defender.isCPU == false && !defender.gameBoard.isFleetSunk()) {
+                                gameInfoBanner.textContent = defender.name + ", attack " + attacker.name + "'s fleet!"
                                 defender.gameBoard.isActiveBoard = false;
                                 attacker.gameBoard.isActiveBoard = true;
                             }
@@ -86,6 +95,7 @@ function gameloop(player1, player2) {
         gameInfoBanner.textContent = attacker.name  + " wins!";
         defender.gameBoard.isActiveBoard = false;
         attacker.gameBoard.isActiveBoard = false;
+        // Add "new game" options
     }
 }
 
