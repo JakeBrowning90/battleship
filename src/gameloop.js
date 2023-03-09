@@ -51,7 +51,6 @@ function gameloop(player1, player2) {
                         if (defender.gameBoard.allSpaces[i][j].tried == false) {
                             // ... send the attack...
                             let outcome = defender.gameBoard.receiveAttack([i, j], lastAttackDiv);
-                            console.log(outcome)
                             // ... change the appearance of the tile
                             defender.gameBoard.updateTile(tile, outcome);
                       
@@ -64,7 +63,6 @@ function gameloop(player1, player2) {
                                 let cpuTry = defender.getPlayerAttack();
 
                                 let outcome = attacker.gameBoard.receiveAttack(cpuTry, player1LastAttack);
-                                    console.log(outcome)
                                 //TODO: logic to have CPU try shots near last successful hit (what if the last hit sinks the ship?)
 
                                 let targetedTile = document.getElementById(cpuTry);
@@ -91,7 +89,6 @@ function gameloop(player1, player2) {
 
     // When a fleet is sunk, declare player that just attacked as winner and block further moves
     function endGame(attacker, defender) {
-        // const gameInfoBanner = document.querySelector("#gameInfoBanner");
         gameStatus.textContent = attacker.name  + " wins!";
         defender.gameBoard.isActiveBoard = false;
         attacker.gameBoard.isActiveBoard = false;

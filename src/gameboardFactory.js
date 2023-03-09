@@ -44,7 +44,7 @@ class Gameboard {
             let proposedSpaces;
             do {
                 do {
-                    orientation = this.getOrientation(this.fleet[i].name);
+                    orientation = this.getOrientation(this.fleet[i].name, this.fleet[i].length);
                     placement = this.getPlacement(this.fleet[i].length, orientation);
                     
                     // AUTOMATIC PLACEMENT FOR DOM TESTS
@@ -70,7 +70,7 @@ class Gameboard {
     }
 
     // Determine if ship will be placed horizontally or vertically
-    getOrientation(shipName) {
+    getOrientation(shipName, shipLength) {
         let direction;
         let check;
         // Randomly determine direction for CPU 
@@ -85,7 +85,7 @@ class Gameboard {
         // Manually get direction for human player
         else {
             do { 
-                direction = prompt("Enter " + shipName + " orientation (h or v)");
+                direction = prompt("Enter " + shipName + " (Length: "+ shipLength + ")" + " orientation (h or v)");
                 if (direction == 'h' || direction == 'v') {
                     check = 1;
                 }
@@ -190,16 +190,10 @@ class Gameboard {
         if (outcome != null) {
             // tile.classList.remove("hasShip"); 
             tile.classList.add("struckShip"); 
+            tile.textContent = outcome.charAt(0);
         } else {
             tile.classList.add("missedShot"); 
         } 
-
-        // if (tile.classList.contains("hasShip")) {
-        //     tile.classList.remove("hasShip"); 
-        //     tile.classList.add("struckShip"); 
-        // } else if (!tile.classList.contains("hasShip") && !tile.classList.contains("struckShip")) {
-        //     tile.classList.add("missedShot"); 
-        // } 
     }
 
     // Randomly generate coordinates for CPU ship placement
@@ -218,7 +212,7 @@ class Gameboard {
             }
         }
         if (sunkShips == this.fleet.length) {
-            console.log("All ships sunk!")
+            // console.log("All ships sunk!")
             return true;
         } else {
             return false;

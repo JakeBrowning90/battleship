@@ -16,8 +16,24 @@ function drawGameScreen() {
     const gameInstructions = document.createElement("div");
     gameInstructions.setAttribute("id", "gameInstructions");
     gameInstructions.textContent = "Click a square on your opponent's grid to attack. Sink all 5 ships to win!"
-    const tileKey = document.createElement("div");
-    tileKey.setAttribute("id", "tileKey");
+    const shipsKey = document.createElement("div");
+    shipsKey.setAttribute("id", "shipsKey");
+    const shipList = document.createElement("ul");
+    const carrier = document.createElement("li");
+    carrier.textContent = "Carrier - 5";
+    const battleship = document.createElement("li");
+    battleship.textContent = "Battleship - 4";
+    const destroyer = document.createElement("li");
+    destroyer.textContent = "Destroyer - 3";
+    const submarine = document.createElement("li");
+    submarine.textContent = "Submarine - 3";
+    const patrolBoat = document.createElement("li");
+    patrolBoat.textContent = "Patrol boat - 2";
+    shipList.appendChild(carrier)
+    shipList.appendChild(battleship)
+    shipList.appendChild(destroyer)
+    shipList.appendChild(submarine)
+    shipList.appendChild(patrolBoat)
 
     // Each player's half of the screen
     const player1Half = document.createElement("div");
@@ -77,7 +93,8 @@ function drawGameScreen() {
     gameScreenBase.appendChild(gameInfoBanner);
     gameInfoBanner.appendChild(gameStatus);
     gameInfoBanner.appendChild(gameInstructions);
-    gameInfoBanner.appendChild(tileKey);
+    gameInfoBanner.appendChild(shipsKey);
+    shipsKey.appendChild(shipList);
 
     gameScreenBase.appendChild(player1Half);
     player1Half.appendChild(player1Fleet);

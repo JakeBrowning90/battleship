@@ -10,15 +10,12 @@ import { gameloop } from './gameloop';
 import { Player } from './playerFactory';
 
 // testFunction();
-console.log("Anchors aweigh!");
-
 drawStartScreen();
 
 // Create new players with name inputs and checkboxes
 const startScreenBase = document.querySelector(".startScreenBase");
 startScreenBase.addEventListener('submit', (event) => {
     event.preventDefault();
-    console.log("Start game!");
     let player1 = new Player(player1NameInput.value, player1AICheckbox.checked, player1AutoPlaceCheckbox.checked);
     let player2 = new Player(player2NameInput.value, player2AICheckbox.checked, player2AutoPlaceCheckbox.checked);
     clearContent();

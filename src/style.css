@@ -1,31 +1,33 @@
 html, body {
     background-color: rgb(191, 191, 191);
-    color: black;
+    color: white;
     display: grid;
-    grid-template-rows: 50px 4fr 50px;
+    grid-template-rows: 30px 1fr 30px;
     height: 100vh;
     width: 100%;
 }
 
 h1 {
-    font-size: 4vh;
+    font-size: 6vh;
 }
 
-#header, #footer {
-    background-color: rgb(0, 0, 196);
+#header, #footer, .startScreenBase, .gameInfoBanner > *, .fleetStatus, .corner, .lastAttack {
+    background-color: #006699;
 }
 
-#content {
-    background-color: rgb(109, 101, 255);
+#header, #footer, #content {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+#content {
+    background-color: #c9d5ea;
+}
+
 .startScreenBase {
     height: 50%;
     width: 50%;
-    background-color: #7fa8ff;
     padding: 10px;
     display: grid;
     grid-template-rows: 2fr repeat(5, 1fr);
@@ -51,44 +53,61 @@ h1 {
 }
 
 .gameScreenBase {
-    height: 90%;
+    height: 100%;
     width: 100%;
-    background-color: #7fa8ff;
+    background-color: #c9d5ea;
     display: grid;
     grid-template-rows: 1fr 3fr;
     grid-template-columns: repeat(4, 1fr);
 }
 
 .gameScreenBase > * {
-    border: 1px solid black;
     box-sizing: border-box;
 }
 
 .gameInfoBanner {
+    margin-top: 30px;
     grid-column: 2 / -2;
     display: grid;
-    grid-template-rows: 2fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 5px;
+}
+
+#gameStatus {
+    grid-column: 1 / -1;
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#gameInstructions {
+    grid-column: 1 / 2;
+}
+
+#shipsKey {
+
 }
 
 .gameInfoBanner > * {
-    border: 1px solid black;
     box-sizing: border-box;
+    padding: 2px;
 }
 
-.instructionDiv {
+/* .instructionDiv {
     grid-column: 1 / -1;
-}
+} */
 
 .playerHalf {
-    background-color: blanchedalmond;
-    margin: 10%;
+    padding: 30px;
+    height: 100%;
+    width: 100%;
+    place-self: center;
     box-sizing: border-box;
     display: grid;
     grid-template-columns: 3fr repeat(11, 1fr);
     grid-template-rows:1fr repeat(11, 1fr);
-    height: 60vh;
-    width: 60vh;
-    place-self: center;
 }
 
 .player1Half {
@@ -101,7 +120,25 @@ h1 {
 
 .fleetStatus {
     grid-row: 1 / -1;
-    background-color: grey;
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+}
+
+.lastAttack {
+    height: 100%;
+    width: 100%;
+    grid-column: 2 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.corner, .navMarker {
+    box-sizing: border-box;
+    border: 1px solid black;
+    background-color: #807f7f;
+
 }
 
 .corner {
@@ -109,20 +146,11 @@ h1 {
     grid-column: 2 / 3;
     height: 100%;
     width: 100%;
-    box-sizing: border-box;
-    border: 1px solid black;
-}
-
-.lastAttack {
-    background-color: pink;
-    grid-column: 2 / -1;
 }
 
 .navMarker {
     height: 100%;
     width: 100%;
-    box-sizing: border-box;
-    border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -145,6 +173,9 @@ h1 {
     width: 100%;
     box-sizing: border-box;
     border: 1px solid grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .hasShip {
@@ -152,14 +183,14 @@ h1 {
 }
 
 .struckShip {
-    background-color: red;
+    background-color: rgba(255, 0, 0, 0.759);
 }
 
 .missedShot {
-    background-color: blue;
+    background-color: rgba(0, 0, 255, 0.500);
 }
 
-.placeShipBtn {
+/* .placeShipBtn {
     grid-column: -1 / -3;
     grid-row: 2 / 4;
     margin: 5px;
@@ -173,4 +204,4 @@ h1 {
 
 .errorField {
     grid-column: -1 / -3;
-}
+} */
