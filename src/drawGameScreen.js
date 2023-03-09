@@ -11,9 +11,13 @@ function drawGameScreen() {
     gameInfoBanner.setAttribute("id", "gameInfoBanner");
     gameInfoBanner.classList.add("gameInfoBanner");
     
-    // const instructionDiv = document.createElement("div");
-    // instructionDiv.classList.add("instructionDiv");
-    // instructionDiv.textContent = "TBA: Prompts for placing ships and indicate player turn";
+    const gameStatus = document.createElement("div");
+    gameStatus.setAttribute("id", "gameStatus");
+    const gameInstructions = document.createElement("div");
+    gameInstructions.setAttribute("id", "gameInstructions");
+    gameInstructions.textContent = "Click a square on your opponent's grid to attack. Sink all 5 ships to win!"
+    const tileKey = document.createElement("div");
+    tileKey.setAttribute("id", "tileKey");
 
     // Each player's half of the screen
     const player1Half = document.createElement("div");
@@ -71,8 +75,9 @@ function drawGameScreen() {
     content.appendChild(gameScreenBase);
     
     gameScreenBase.appendChild(gameInfoBanner);
-    // gameInfoBanner.appendChild(instructionDiv);
-
+    gameInfoBanner.appendChild(gameStatus);
+    gameInfoBanner.appendChild(gameInstructions);
+    gameInfoBanner.appendChild(tileKey);
 
     gameScreenBase.appendChild(player1Half);
     player1Half.appendChild(player1Fleet);

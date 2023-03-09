@@ -1,6 +1,6 @@
 function gameloop(player1, player2) {
 
-    const gameInfoBanner = document.querySelector("#gameInfoBanner");
+    const gameStatus = document.querySelector("#gameStatus");
 
     const player1Grid = document.querySelector("#player1Grid");
     const player2Grid = document.querySelector("#player2Grid");
@@ -26,7 +26,7 @@ function gameloop(player1, player2) {
     drawTiles(player1, player1Grid, player1LastAttack, player2);
     drawTiles(player2, player2Grid, player2LastAttack, player1);
 
-    gameInfoBanner.textContent = player1.name + ", attack " + player2.name + "'s fleet!"
+    gameStatus.textContent = player1.name + ", attack " + player2.name + "'s fleet!"
 
     // Let player 1 attack first
     player2.gameBoard.isActiveBoard = true;
@@ -76,7 +76,7 @@ function gameloop(player1, player2) {
                             }
                              //...if human opponent, lock the current board and unlock the opponent's board
                             else if (defender.isCPU == false && !defender.gameBoard.isFleetSunk()) {
-                                gameInfoBanner.textContent = defender.name + ", attack " + attacker.name + "'s fleet!"
+                                gameStatus.textContent = defender.name + ", attack " + attacker.name + "'s fleet!"
                                 defender.gameBoard.isActiveBoard = false;
                                 attacker.gameBoard.isActiveBoard = true;
                             }
@@ -91,8 +91,8 @@ function gameloop(player1, player2) {
 
     // When a fleet is sunk, declare player that just attacked as winner and block further moves
     function endGame(attacker, defender) {
-        const gameInfoBanner = document.querySelector("#gameInfoBanner");
-        gameInfoBanner.textContent = attacker.name  + " wins!";
+        // const gameInfoBanner = document.querySelector("#gameInfoBanner");
+        gameStatus.textContent = attacker.name  + " wins!";
         defender.gameBoard.isActiveBoard = false;
         attacker.gameBoard.isActiveBoard = false;
         // Add "new game" options
