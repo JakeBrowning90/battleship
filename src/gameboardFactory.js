@@ -85,7 +85,7 @@ class Gameboard {
         // Manually get direction for human player
         else {
             do { 
-                direction = prompt("Enter " + shipName + " (Length: "+ shipLength + ")" + " orientation (h or v)");
+                direction = prompt("Enter " + shipName + " (length: "+ shipLength + ")" + " orientation (h or v):");
                 if (direction == 'h' || direction == 'v') {
                     check = 1;
                 }
@@ -106,10 +106,10 @@ class Gameboard {
         } else {
             // Get coordinates from human player
             do {
-                row = parseInt(prompt("Enter row"));
+                row = parseInt(prompt("Enter row (0-9):"));
             } while (row < 0 || row > 9)
             do {
-                col = parseInt(prompt("Enter column"));
+                col = parseInt(prompt("Enter column (0-9):"));
             } while (col < 0 || col > 9)
         }
         return [row, col];
@@ -134,14 +134,18 @@ class Gameboard {
             if (startingCell[1] + shipLength <= 10) {
                 return true;
             } else {
-                console.log("off the grid horizontally")
+                if (this.CPU == false) {
+                    alert("Off the grid horizontally, try again");
+                }
                 return false;  
             }    
         } else if (orientation == 'v') {
             if (startingCell[0] + shipLength <= 10) {
                 return true;  
             } else {
-                console.log("off the grid vertically")
+                if (this.CPU == false) {
+                    alert("Off the grid vertically, try again");
+                }
                 return false;  
             }    
         } 
@@ -152,7 +156,9 @@ class Gameboard {
     doesPlacementClash(proposedSpaces) {
         for (let i = 0; i < proposedSpaces.length; i++) {
             if (this.occupiedSpaces.includes(proposedSpaces[i])) {
-                console.log("Ship in the way!")
+                if (this.CPU == false) {
+                    alert("Conflict with previous ship, try again");
+                }
                 return true;
             }
         }

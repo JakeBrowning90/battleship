@@ -4,8 +4,6 @@ function clearContent() {
     while (content.firstChild) {
         content.removeChild(content.lastChild);
       }
-    
-    console.log("Content cleared");
 }
 
 export {clearContent}
