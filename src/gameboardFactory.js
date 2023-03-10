@@ -134,7 +134,7 @@ class Gameboard {
             if (startingCell[1] + shipLength <= 10) {
                 return true;
             } else {
-                if (this.CPU == false) {
+                if (this.autoPlace == false) {
                     alert("Off the grid horizontally, try again");
                 }
                 return false;  
@@ -143,7 +143,7 @@ class Gameboard {
             if (startingCell[0] + shipLength <= 10) {
                 return true;  
             } else {
-                if (this.CPU == false) {
+                if (this.autoPlace == false) {
                     alert("Off the grid vertically, try again");
                 }
                 return false;  
@@ -156,7 +156,7 @@ class Gameboard {
     doesPlacementClash(proposedSpaces) {
         for (let i = 0; i < proposedSpaces.length; i++) {
             if (this.occupiedSpaces.includes(proposedSpaces[i])) {
-                if (this.CPU == false) {
+                if (this.autoPlace == false) {
                     alert("Conflict with previous ship, try again");
                 }
                 return true;
