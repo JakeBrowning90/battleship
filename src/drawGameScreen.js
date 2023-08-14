@@ -35,6 +35,10 @@ function drawGameScreen() {
     shipList.appendChild(submarine)
     shipList.appendChild(patrolBoat)
 
+    const resetButton = document.createElement("button");
+    resetButton.setAttribute("id", "resetButton");
+    resetButton.textContent = "Reset game";
+
     // Each player's half of the screen
     const player1Half = document.createElement("div");
     player1Half.classList.add("player1Half", "playerHalf");
@@ -95,6 +99,7 @@ function drawGameScreen() {
     gameInfoBanner.appendChild(gameInstructions);
     gameInfoBanner.appendChild(shipsKey);
     shipsKey.appendChild(shipList);
+    gameInfoBanner.appendChild(resetButton);
 
     gameScreenBase.appendChild(player1Half);
     player1Half.appendChild(player1Fleet);

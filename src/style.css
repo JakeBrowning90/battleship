@@ -82,9 +82,14 @@ main {
     margin-top: 30px;
     grid-column: 2 / -2;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr 1fr;
     gap: 5px;
+}
+
+.gameInfoBanner > * {
+    box-sizing: border-box;
+    padding: 5px;
 }
 
 #gameStatus {
@@ -103,9 +108,16 @@ main {
 
 }
 
-.gameInfoBanner > * {
-    box-sizing: border-box;
-    padding: 2px;
+#resetButton {
+    background-color: #807f7f;
+    color: white;
+    font-weight: bold;
+}
+
+#resetButton:hover {
+    background-color: #cd3737;
+    color: white;
+    font-weight: bold;
 }
 
 /* .instructionDiv {
