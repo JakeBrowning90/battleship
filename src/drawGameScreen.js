@@ -1,7 +1,7 @@
 import { drawShipPlacer } from "./drawShipPlacer";
 
 function drawGameScreen() {
-    const content = document.querySelector("#content");
+    const main = document.querySelector("main");
 
     const gameScreenBase = document.createElement("div");
     gameScreenBase.classList.add("gameScreenBase");
@@ -88,7 +88,7 @@ function drawGameScreen() {
     }
 
 
-    content.appendChild(gameScreenBase);
+    main.appendChild(gameScreenBase);
     
     gameScreenBase.appendChild(gameInfoBanner);
     gameInfoBanner.appendChild(gameStatus);

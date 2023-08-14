@@ -1,5 +1,5 @@
 function drawStartScreen() {
-    const content = document.querySelector("#content");
+    const main = document.querySelector("main");
 
     const startScreenBase = document.createElement("form");
     startScreenBase.classList.add("startScreenBase");
@@ -82,7 +82,7 @@ function drawStartScreen() {
     startGameBtn.setAttribute("value", "Start Game");
 
     // Append form elements
-    content.appendChild(startScreenBase);
+    main.appendChild(startScreenBase);
     startScreenBase.appendChild(startScreenTitle);
     startScreenBase.appendChild(player1NameInputLabel);
     startScreenBase.appendChild(player1AutoPlaceLabel);

@@ -1,8 +1,8 @@
 function clearContent() {
-    const content = document.querySelector("#content");
+    const main = document.querySelector("main");
 
-    while (content.firstChild) {
-        content.removeChild(content.lastChild);
+    while (main.firstChild) {
+      main.removeChild(main.lastChild);
       }
 }
 

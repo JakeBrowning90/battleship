@@ -11,17 +11,17 @@ h1 {
     font-size: 6vh;
 }
 
-#header, #footer, .startScreenBase, .gameInfoBanner > *, .fleetStatus, .corner, .lastAttack {
+header, footer, .startScreenBase, .gameInfoBanner > *, .fleetStatus, .corner, .lastAttack {
     background-color: #006699;
 }
 
-#header, #footer, #content {
+header, footer, main {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#content {
+main {
     background-color: #c9d5ea;
 }
 
