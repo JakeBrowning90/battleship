@@ -1,6 +1,7 @@
 html, body {
     background-color: rgb(191, 191, 191);
     color: white;
+    font-family: 'Courier New', monospace;
     /* display: grid;
     grid-template-rows: 30px 1fr 30px; */
     display: flex;
@@ -19,7 +20,7 @@ h1 {
 }
 
 footer, .startScreenBase, .gameInfoBanner > *, .fleetStatus, .corner, .lastAttack {
-    background-color: #006699;
+    background-color: #003e5d;
 }
 
 header, footer, main {
