@@ -1,3 +1,8 @@
+import { clearContent } from './clearContent';
+import { drawGameScreen } from "./drawGameScreen";
+import { gameloop } from './gameloop';
+import { Player } from './playerFactory';
+
 function drawStartScreen() {
     const main = document.querySelector("main");
 
@@ -97,6 +102,16 @@ function drawStartScreen() {
     startScreenBase.appendChild(player2AutoPlaceCheckbox);
     startScreenBase.appendChild(player2AICheckbox);
     startScreenBase.appendChild(startGameBtn);
+
+    // const startScreenBase = document.querySelector(".startScreenBase");
+    startScreenBase.addEventListener('submit', (event) => {
+        event.preventDefault();
+        let player1 = new Player(player1NameInput.value, player1AICheckbox.checked, player1AutoPlaceCheckbox.checked);
+        let player2 = new Player(player2NameInput.value, player2AICheckbox.checked, player2AutoPlaceCheckbox.checked);
+        clearContent();
+        drawGameScreen();
+        gameloop(player1, player2);
+    })
 }
 
 export {drawStartScreen}

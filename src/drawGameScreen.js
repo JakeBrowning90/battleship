@@ -1,4 +1,6 @@
 import { drawShipPlacer } from "./drawShipPlacer";
+import { clearContent } from "./clearContent";
+import { drawStartScreen } from "./drawStartScreen";
 
 function drawGameScreen() {
     const main = document.querySelector("main");
@@ -38,6 +40,12 @@ function drawGameScreen() {
     const resetButton = document.createElement("button");
     resetButton.setAttribute("id", "resetButton");
     resetButton.textContent = "Reset game";
+
+    resetButton.addEventListener('click', () => {
+        console.log("Reset!")
+        clearContent();
+        drawStartScreen();
+    })
 
     // Each player's half of the screen
     const player1Half = document.createElement("div");
